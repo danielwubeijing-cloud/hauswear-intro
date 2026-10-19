@@ -15,71 +15,19 @@
         .slide-img-wrap { position: absolute; top: 0; left: 0; width: 100%; height: calc(100vh - 100px); display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
         .slide-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        /* 左右双图容器（响应式：横屏左右，竖屏上下） */
-        .slide-dual-wrap { 
-            position: absolute; 
-            top: 0; left: 0; width: 100%; height: calc(100vh - 100px); 
-            display: flex; 
-            flex-direction: row; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 20px 40px; 
-            gap: 20px; 
-        }
-        .dual-img-box { 
-            flex: 1; 
-            width: 50%; 
-            height: calc(100vh - 140px); 
-            min-height: 0; 
-            min-width: 0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            background: #fafafa; 
-            border-radius: 8px; 
-            border: 1px solid #eee; 
-            cursor: zoom-in; 
-            overflow: hidden; 
-            padding: 10px; 
-        }
+        /* 左右双图容器 */
+        .slide-dual-wrap { position: absolute; top: 0; left: 0; width: 100%; height: calc(100vh - 100px); display: flex; flex-direction: row; align-items: center; justify-content: center; padding: 20px 40px; gap: 20px; }
+        .dual-img-box { flex: 1; width: 50%; height: calc(100vh - 140px); min-height: 0; min-width: 0; display: flex; align-items: center; justify-content: center; background: #fafafa; border-radius: 8px; border: 1px solid #eee; cursor: zoom-in; overflow: hidden; padding: 10px; }
         .dual-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.2s ease; }
         .dual-img-box:hover img { transform: scale(1.03); }
 
-        /* 第十页：大矩阵/响应式网格容器 */
-        .slide-matrix-wrap {
-            position: absolute;
-            top: 10px; left: 20px; right: 20px; height: calc(100vh - 120px);
-            display: grid;
-            background: #fafafa;
-            border-radius: 12px;
-            border: 1px solid #eaeaea;
-            padding: 16px;
-            gap: 12px;
-            overflow-y: auto;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-        }
-
-        .matrix-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #ffffff;
-            border-radius: 6px;
-            border: 1px solid #f0f0f0;
-            overflow: hidden;
-            cursor: zoom-in;
-            padding: 4px;
-        }
-        .matrix-item img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: transform 0.2s ease;
-        }
+        /* 色彩矩阵网格容器 */
+        .slide-matrix-wrap { position: absolute; top: 10px; left: 20px; right: 20px; height: calc(100vh - 120px); display: grid; background: #fafafa; border-radius: 12px; border: 1px solid #eaeaea; padding: 16px; gap: 12px; overflow-y: auto; grid-template-columns: repeat(6, 1fr); grid-template-rows: repeat(3, 1fr); }
+        .matrix-item { display: flex; align-items: center; justify-content: center; background: #ffffff; border-radius: 6px; border: 1px solid #f0f0f0; overflow: hidden; cursor: zoom-in; padding: 4px; }
+        .matrix-item img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.2s ease; }
         .matrix-item:hover img { transform: scale(1.04); }
 
-        /* 横屏网格定位 */
+        /* 网格定位 */
         #item_y_top { grid-column: 1; grid-row: 1; }
         #item_y_long { grid-column: 1; grid-row: 2; }
         #item_y_short { grid-column: 1; grid-row: 3; }
@@ -99,59 +47,65 @@
         #item_s_long { grid-column: 6; grid-row: 2; }
         #item_s_short { grid-column: 6; grid-row: 3; }
 
-        /* 第十五页：非对称三图混排容器（横屏左大右上下，竖屏3张竖排） */
-        .slide-asym-wrap {
+        /* 第十六页：三列卡片网格容器（黑、灰、粉三套展示，每套上下两图） */
+        .slide-trio-wrap {
             position: absolute;
-            top: 10px; left: 30px; right: 30px; height: calc(100vh - 120px);
+            top: 10px; left: 20px; right: 20px; height: calc(100vh - 120px);
             display: grid;
+            grid-template-columns: repeat(3, 1fr);
             background: #fafafa;
             border-radius: 12px;
             border: 1px solid #eaeaea;
             padding: 16px;
             gap: 16px;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            overflow-y: auto;
         }
-        .asym-item {
+        .trio-card {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            padding: 12px;
+            gap: 12px;
+        }
+        .trio-top-img, .trio-bottom-img {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #f0f0f0;
-            overflow: hidden;
+            background: #fcfcfc;
+            border-radius: 6px;
+            border: 1px solid #f2f2f2;
             cursor: zoom-in;
+            overflow: hidden;
             padding: 8px;
+            min-height: 140px;
         }
-        .asym-item img {
+        .trio-card img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
             transition: transform 0.2s ease;
         }
-        .asym-item:hover img { transform: scale(1.03); }
+        .trio-card img:hover {
+            transform: scale(1.03);
+        }
 
+        /* 非对称三图混排容器 */
+        .slide-asym-wrap { position: absolute; top: 10px; left: 30px; right: 30px; height: calc(100vh - 120px); display: grid; background: #fafafa; border-radius: 12px; border: 1px solid #eaeaea; padding: 16px; gap: 16px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+        .asym-item { display: flex; align-items: center; justify-content: center; background: #ffffff; border-radius: 8px; border: 1px solid #f0f0f0; overflow: hidden; cursor: zoom-in; padding: 8px; }
+        .asym-item img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.2s ease; }
+        .asym-item:hover img { transform: scale(1.03); }
         #item_15_left { grid-column: 1; grid-row: 1 / span 2; }
         #item_15_rt { grid-column: 2; grid-row: 1; }
         #item_15_rb { grid-column: 2; grid-row: 2; }
 
-        /* 竖屏状态下（Portrait）响应式切换 */
+        /* 竖屏响应式 */
         @media (orientation: portrait) {
-            .slide-dual-wrap { 
-                flex-direction: column; 
-                padding: 15px 20px; 
-                gap: 10px; 
-            }
-            .dual-img-box { 
-                width: 100%; 
-                height: 47%; 
-            }
-            .slide-matrix-wrap {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(6, 1fr);
-                padding: 10px;
-                gap: 8px;
-            }
+            .slide-dual-wrap { flex-direction: column; padding: 15px 20px; gap: 10px; }
+            .dual-img-box { width: 100%; height: 47%; }
+            .slide-matrix-wrap { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(6, 1fr); padding: 10px; gap: 8px; }
             #item_y_top { grid-column: 1; grid-row: 1; }
             #item_y_long { grid-column: 2; grid-row: 1; }
             #item_y_short { grid-column: 3; grid-row: 1; }
@@ -171,12 +125,15 @@
             #item_s_long { grid-column: 2; grid-row: 6; }
             #item_s_short { grid-column: 3; grid-row: 6; }
 
-            .slide-asym-wrap {
+            .slide-trio-wrap {
                 grid-template-columns: 1fr;
-                grid-template-rows: repeat(3, 1fr);
+                grid-template-rows: repeat(3, auto);
                 padding: 10px;
-                gap: 10px;
+                gap: 12px;
             }
+            .trio-card { padding: 10px; }
+
+            .slide-asym-wrap { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); padding: 10px; gap: 10px; }
             #item_15_left { grid-column: 1; grid-row: 1; }
             #item_15_rt { grid-column: 1; grid-row: 2; }
             #item_15_rb { grid-column: 1; grid-row: 3; }
@@ -196,72 +153,24 @@
         .scroll-tip { position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 10; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: rgba(0,0,0,0.4); animation: bounce 2s infinite; pointer-events: none; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);} 40% {transform: translateY(-3px) translateX(-50%);} 60% {transform: translateY(-1px) translateX(-50%);} }
     
-        /* 第二页居中文字排版样式 */
-        .slide-center-text {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: calc(100vh - 100px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
-        .slide-center-text .center-num {
-            font-size: 13px;
-            letter-spacing: 5px;
-            color: #111111;
-            margin-bottom: 22px;
-            font-weight: 400;
-        }
-        .slide-center-text h2 {
-            font-size: 52px;
-            font-weight: 800;
-            letter-spacing: 10px;
-            color: #000000;
-            margin-bottom: 22px;
-            text-transform: uppercase;
-        }
-        @media (max-width: 768px) {
-            .slide-center-text h2 {
-                font-size: 28px;
-                letter-spacing: 4px;
-            }
-            .slide-center-text .center-num {
-                font-size: 11px;
-                letter-spacing: 3px;
-            }
+        /* 居中文字排版样式 */
+        .slide-center-text { position: absolute; top: 0; left: 0; width: 100%; height: calc(100vh - 100px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; cursor: zoom-in; }
+        .slide-center-text .center-num { font-size: 13px; letter-spacing: 5px; color: #111111; margin-bottom: 20px; font-weight: 400; }
+        .slide-center-text h2 { 
+            font-size: clamp(24px, 3.8vw, 42px); 
+            font-weight: 800; 
+            letter-spacing: 4px; 
+            color: #000000; 
+            margin-bottom: 18px; 
+            text-transform: uppercase; 
+            max-width: 90%;
+            line-height: 1.25;
         }
 
-        /* 品牌 Logo 图片样式（放大至清晰适中） */
-        .center-brand-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            letter-spacing: 2px;
-            color: #444;
-            font-weight: 500;
-        }
-        .center-brand-logo img {
-            height: 36px;
-            width: auto;
-            object-fit: contain;
-            vertical-align: middle;
-        }
-
-        /* 全局行内 Logo 图片样式（适当放大至 18px，保证清晰可见） */
-        .inline-logo {
-            height: 18px;
-            width: auto;
-            vertical-align: middle;
-            object-fit: contain;
-            display: inline-block;
-            margin: 0 2px;
-        }
+        .center-brand-logo { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; letter-spacing: 2px; color: #444; font-weight: 500; }
+        .inline-logo { height: 18px; width: auto; vertical-align: middle; object-fit: contain; display: inline-block; margin: 0 2px; }
     </style>
 
-    <!-- 微信及各大社交平台分享卡片设置 -->
     <meta property="og:title" content="hauswear">
     <meta property="og:description" content=" | unstudied unforced unbound">
     <meta property="og:image" content="https://danielwubeijing-cloud.github.io/hauswear-intro/logo_2.png">
@@ -275,7 +184,7 @@
         <!-- 01 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide1.webp')"><img src="slide1.webp" alt="Slide 1"></div><div class="content"><div class="tag">01 / 19</div><h1>/ Introducing</h1></div></section>
         
-        <!-- 02: 纯文字居中排版页面 -->
+        <!-- 02 -->
         <section class="slide">
             <div class="slide-center-text">
                 <div class="center-num">/ 001</div>
@@ -294,9 +203,9 @@
         <!-- 04 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide4.webp')"><img src="slide4.webp" alt="Slide 4"></div><div class="content"><div class="tag">04 / 19</div><h1>/001 BRAND CONCEPT</h1><p>unstudied unforced unbound</p></div></section>
         
-        <!-- 05 (已改成第二页居中排版格式，点击可预览 slide5.webp) -->
+        <!-- 05 -->
         <section class="slide">
-            <div class="slide-center-text" onclick="openLightbox('slide5.webp')" style="cursor: zoom-in;">
+            <div class="slide-center-text" onclick="openLightbox('slide5.webp')">
                 <div class="center-num">/ 002</div>
                 <h2>PRODUCT</h2>
                 <div class="center-brand-logo">/ Introducing</div>
@@ -308,11 +217,11 @@
             </div>
         </section>
 
-        <!-- 06 (已改成第二页居中排版格式，点击可预览 slide6.webp) -->
+        <!-- 06 -->
         <section class="slide">
-            <div class="slide-center-text" onclick="openLightbox('slide6.webp')" style="cursor: zoom-in;">
+            <div class="slide-center-text" onclick="openLightbox('slide6.webp')">
                 <div class="center-num">/ 002.1</div>
-                <h2 style="font-size: 36px; letter-spacing: 4px;">The Essential Poplin Lounge Wear</h2>
+                <h2>The Essential Poplin<br>Lounge Wear</h2>
                 <div class="center-brand-logo">棉府绸家居服</div>
             </div>
             <div class="content">
@@ -349,7 +258,7 @@
             <div class="content"><div class="tag">09 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服（短裤正反面细节）</p></div>
         </section>
 
-        <!-- 10: 响应式色彩矩阵页 -->
+        <!-- 10 -->
         <section class="slide">
             <div class="slide-matrix-wrap">
                 <div class="matrix-item" id="item_y_top" onclick="openLightbox('slide10_y_top.webp')"><img src="slide10_y_top.webp" alt="Yellow Top"></div>
@@ -374,11 +283,11 @@
             <div class="content"><div class="tag">10 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服（全色系色彩矩阵）</p></div>
         </section>
 
-        <!-- 11 (已改成第二页居中排版格式，点击可预览 slide11.webp) -->
+        <!-- 11 -->
         <section class="slide">
-            <div class="slide-center-text" onclick="openLightbox('slide11.webp')" style="cursor: zoom-in;">
+            <div class="slide-center-text" onclick="openLightbox('slide11.webp')">
                 <div class="center-num">/ 002.2</div>
-                <h2 style="font-size: 34px; letter-spacing: 4px;">Washable Silk Lounge Wear</h2>
+                <h2>Washable Silk<br>Lounge Wear</h2>
                 <div class="center-brand-logo">可水洗真丝家居服</div>
             </div>
             <div class="content">
@@ -406,11 +315,11 @@
             <div class="content"><div class="tag">13 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服（系列质感演绎）</p></div>
         </section>
 
-        <!-- 14 (已改成第二页居中排版格式，点击可预览 slide14.webp) -->
+        <!-- 14 -->
         <section class="slide">
-            <div class="slide-center-text" onclick="openLightbox('slide14.webp')" style="cursor: zoom-in;">
+            <div class="slide-center-text" onclick="openLightbox('slide14.webp')">
                 <div class="center-num">/ 002.3</div>
-                <h2 style="font-size: 38px; letter-spacing: 4px;">Washable Silk Eye Mask</h2>
+                <h2>Washable Silk<br>Eye Mask</h2>
                 <div class="center-brand-logo">可水洗真丝眼罩</div>
             </div>
             <div class="content">
@@ -420,7 +329,7 @@
             </div>
         </section>
 
-        <!-- 15: 非对称三图混排页 -->
+        <!-- 15 -->
         <section class="slide">
             <div class="slide-asym-wrap">
                 <div class="asym-item" id="item_15_left" onclick="openLightbox('slide15_left.webp')"><img src="slide15_left.webp" alt="Slide 15 Left"></div>
@@ -430,14 +339,49 @@
             <div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩（多角度立体展示）</p></div>
         </section>
 
-        <!-- 16 ~ 19 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide16.webp')"><img src="slide16.webp" alt="Slide 16"></div><div class="content"><div class="tag">16 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
-        
-        <!-- 17 (已改成第二页居中排版格式，点击可预览 slide17.webp) -->
+        <!-- 16: 三列卡片交互页（黑、灰、粉三套独立上下两张图点击预览） -->
         <section class="slide">
-            <div class="slide-center-text" onclick="openLightbox('slide17.webp')" style="cursor: zoom-in;">
+            <div class="slide-trio-wrap">
+                <!-- 黑色套 -->
+                <div class="trio-card">
+                    <div class="trio-top-img" onclick="openLightbox('slide16_black_top.webp')">
+                        <img src="slide16_black_top.webp" alt="Black Eye Mask Top">
+                    </div>
+                    <div class="trio-bottom-img" onclick="openLightbox('slide16_black_bottom.webp')">
+                        <img src="slide16_black_bottom.webp" alt="Black Eye Mask Bottom">
+                    </div>
+                </div>
+                <!-- 灰色套 -->
+                <div class="trio-card">
+                    <div class="trio-top-img" onclick="openLightbox('slide16_grey_top.webp')">
+                        <img src="slide16_grey_top.webp" alt="Grey Eye Mask Top">
+                    </div>
+                    <div class="trio-bottom-img" onclick="openLightbox('slide16_grey_bottom.webp')">
+                        <img src="slide16_grey_bottom.webp" alt="Grey Eye Mask Bottom">
+                    </div>
+                </div>
+                <!-- 粉色套 -->
+                <div class="trio-card">
+                    <div class="trio-top-img" onclick="openLightbox('slide16_pink_top.webp')">
+                        <img src="slide16_pink_top.webp" alt="Pink Eye Mask Top">
+                    </div>
+                    <div class="trio-bottom-img" onclick="openLightbox('slide16_pink_bottom.webp')">
+                        <img src="slide16_pink_bottom.webp" alt="Pink Eye Mask Bottom">
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="tag">16 / 19</div>
+                <h1>/002.4 Washable Silk Eye Mask</h1>
+                <p>可水洗真丝眼罩（全色系细节展示）</p>
+            </div>
+        </section>
+        
+        <!-- 17 -->
+        <section class="slide">
+            <div class="slide-center-text" onclick="openLightbox('slide17.webp')">
                 <div class="center-num">/ 002.4</div>
-                <h2 style="font-size: 36px; letter-spacing: 4px;">Washable Silk Scrunchie</h2>
+                <h2>Washable Silk<br>Scrunchie</h2>
                 <div class="center-brand-logo">可水洗真丝发圈</div>
             </div>
             <div class="content">
@@ -447,7 +391,10 @@
             </div>
         </section>
 
+        <!-- 18 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide18.webp')"><img src="slide18.webp" alt="Slide 18"></div><div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
+        
+        <!-- 19 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide19.webp')"><img src="slide19.webp" alt="Slide 19"></div><div class="content"><div class="tag">19 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>感谢阅读</p></div></section>
     </div>
 
