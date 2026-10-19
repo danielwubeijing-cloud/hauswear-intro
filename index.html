@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hauswear | 居家色彩与情绪平衡</title>
+    <!-- 引入高德/谷歌优质无衬线字体与样式 -->
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #111;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            color: #fff;
+        }
+        /* 全屏滚动容器 */
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .slide {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px 24px;
+            background-size: cover;
+            background-position: center;
+        }
+        /* 渐变遮罩，保证文字清晰 */
+        .slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+        .tag {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #d4af37; /* 莫兰迪金/大地色点缀 */
+            margin-bottom: 8px;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #ccc;
+            max-width: 90%;
+        }
+        .slogan {
+            margin-top: 16px;
+            font-style: italic;
+            font-size: 12px;
+            color: #aaa;
+            letter-spacing: 2px;
+        }
+
+        /* 各个Slide的模拟背景色/图占位（后期可替换为您的真实大片图片链接） */
+        #slide1 { background-color: #8b3a3a; } /* 烈日红沙发调性 */
+        #slide2 { background-color: #2c3e50; } /* 都市街头双人自行车 */
+        #slide3 { background-color: #c5a059; } /* 麦田露天宴席 */
+        #slide4 { background-color: #4a2e35; } /* 露台烫衣板与古典雕塑 */
+        #slide5 { background-color: #2b2b2b; } /* 棉府绸家居服系列 */
+
+        /* 引导滑动提示 */
+        .scroll-tip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.6);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-6px) translateX(-50%);}
+            60% {transform: translateY(-3px) translateX(-50%);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Slide 1 -->
+        <section class="slide" id="slide1">
+            <div class="content">
+                <div class="tag">01 / Introduction</div>
+                <h1>introducing hauswear</h1>
+                <p>烈日海滩、鲜红皮沙发与自由呼吸的黄色府绸。打破精致造作，重构居家松弛感。</p>
+                <div class="slogan">unstudied. unforced. unbound.</div>
+            </div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide" id="slide2">
+            <div class="content">
+                <div class="tag">02 / Visual Manifesto</div>
+                <h1>视觉宣言：不设限的生活</h1>
+                <p>unstudied. 不刻意 / unforced. 不费力 / unbound. 不设限。家里是生活，出门也是生活。</p>
+                <div class="slogan">Editorial Fashion for Everyday Life</div>
+            </div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide" id="slide3">
+            <div class="content">
+                <div class="tag">03 / Brand Concept</div>
+                <h1>001 品牌核心理念</h1>
+                <p>诞生于对日常边界的重新理解。不刻意追逐新鲜，关注真正经得起时间检验的质感与情绪平衡。</p>
+                <div class="slogan">Natural & Emotional Balance</div>
+            </div>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide" id="slide4">
+            <div class="content">
+                <div class="tag">04 / Visual Guidelines</div>
+                <h1>视觉法则矩阵</h1>
+                <p><b>Light & Shadow：</b>强硬光影与高饱和色彩。<br><b>Scene：</b>保留都市与自然元素的真实质感。</p>
+                <div class="slogan">Light, Scene & People Status</div>
+            </div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide" id="slide5">
+            <div class="content">
+                <div class="tag">05 / The Essential Poplin</div>
+                <h1>002.1 棉府绸家居服系列</h1>
+                <p>高支棉府绸与莫兰迪色彩的完美交融。挺括却不拘束，让街头与卧室共享同一种惬意。</p>
+                <div class="slogan">hauswear 2026 Collection</div>
+            </div>
+        </section>
+    </div>
+
+    <div class="scroll-tip">↓ 下滑浏览品牌故事</div>
+
+</body>
+</html>
