@@ -125,13 +125,23 @@
             #item_s_long { grid-column: 2; grid-row: 6; }
             #item_s_short { grid-column: 3; grid-row: 6; }
 
+            /* 竖屏响应式：黑/灰/粉三行独立展示，确保每套完整呈现上方大图、下方大图并可平滑滚动 */
             .slide-trio-wrap {
                 grid-template-columns: 1fr;
-                grid-template-rows: repeat(3, auto);
+                grid-template-rows: repeat(3, 1fr);
                 padding: 10px;
-                gap: 12px;
+                gap: 14px;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
             }
-            .trio-card { padding: 10px; }
+            .trio-card {
+                padding: 10px;
+                min-height: 280px;
+                gap: 8px;
+            }
+            .trio-top-img, .trio-bottom-img {
+                min-height: 110px;
+            }
 
             .slide-asym-wrap { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); padding: 10px; gap: 10px; }
             #item_15_left { grid-column: 1; grid-row: 1; }
@@ -395,7 +405,13 @@
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide18.webp')"><img src="slide18.webp" alt="Slide 18"></div><div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
         
         <!-- 19 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide19.webp')"><img src="slide19.webp" alt="Slide 19"></div><div class="content"><div class="tag">19 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>感谢阅读</p></div></section>
+        <section class="slide">
+            <div class="slide-dual-wrap">
+                <div class="dual-img-box" onclick="openLightbox('slide19_left.webp')"><img src="slide19_left.webp" alt="Slide 19 Left"></div>
+                <div class="dual-img-box" onclick="openLightbox('slide19_right.webp')"><img src="slide19_right.webp" alt="Slide 19 Right"></div>
+            </div>
+            <div class="content"><div class="tag">19 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>感谢阅读（多角度质感展示）</p></div>
+        </section>
     </div>
 
     <!-- 全屏放大查看器 -->
