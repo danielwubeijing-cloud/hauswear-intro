@@ -5,207 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>Hauswear | unstudied unforced unbound</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body, html {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background-color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-            color: #222222;
-        }
-        /* 全屏视差滚动容器 */
-        .container {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .slide {
-            width: 100%;
-            height: 100vh;
-            scroll-snap-align: start;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px 20px;
-            background-color: #ffffff;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; color: #222222; }
+        
+        .container { width: 100%; height: 100%; position: relative; overflow-y: scroll; scroll-snap-type: y mandatory; -webkit-overflow-scrolling: touch; }
+        .slide { width: 100%; height: 100vh; scroll-snap-align: start; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px; background-color: #ffffff; }
         
         /* 单图容器 */
-        .slide-img-wrap {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: calc(100vh - 100px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: zoom-in;
-        }
-        .slide-img-wrap img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
+        .slide-img-wrap { position: absolute; top: 0; left: 0; width: 100%; height: calc(100vh - 100px); display: flex; align-items: center; justify-content: center; cursor: zoom-in; }
+        .slide-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
         /* 左右双图容器 */
-        .slide-dual-wrap {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: calc(100vh - 100px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 40px;
-            gap: 30px;
-        }
-        .dual-img-box {
-            flex: 1;
-            width: 50%;
-            height: calc(100vh - 140px);
-            min-height: 0;
-            min-width: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fafafa;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            cursor: zoom-in;
-            overflow: hidden;
-            padding: 10px;
-        }
-        .dual-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            transition: transform 0.2s ease;
-        }
-        .dual-img-box:hover img {
-            transform: scale(1.03);
-        }
+        .slide-dual-wrap { position: absolute; top: 0; left: 0; width: 100%; height: calc(100vh - 100px); display: flex; align-items: center; justify-content: center; padding: 20px 30px; gap: 20px; }
+        .dual-img-box { flex: 1; height: 100%; display: flex; align-items: center; justify-content: center; background: #fafafa; border-radius: 8px; border: 1px solid #eee; cursor: zoom-in; overflow: hidden; padding: 10px; }
+        .dual-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.2s ease; }
+        .dual-img-box:hover img { transform: scale(1.03); }
 
-        /* 极轻量的白色底部渐变 */
-        .slide::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 110px;
-            background: linear-gradient(to top, rgba(255,255,255,0.95) 20%, transparent 100%);
-            z-index: 1;
-            pointer-events: none;
-        }
+        .slide::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 110px; background: linear-gradient(to top, rgba(255,255,255,0.95) 20%, transparent 100%); z-index: 1; pointer-events: none; }
 
-        .content {
-            position: relative;
-            z-index: 2;
-            margin-bottom: 4px;
-            pointer-events: none;
-        }
-        .tag {
-            font-size: 9px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #b3932f;
-            margin-bottom: 2px;
-            font-weight: 500;
-        }
-        h1 {
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 3px;
-            letter-spacing: 1px;
-            color: #1a1a1a;
-        }
-        p {
-            font-size: 11px;
-            font-weight: 300;
-            line-height: 1.4;
-            color: #555555;
-            max-width: 95%;
-        }
+        .content { position: relative; z-index: 2; margin-bottom: 4px; pointer-events: none; }
+        .tag { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #b3932f; margin-bottom: 2px; font-weight: 500; }
+        h1 { font-size: 16px; font-weight: 400; line-height: 1.2; margin-bottom: 3px; letter-spacing: 1px; color: #1a1a1a; }
+        p { font-size: 11px; font-weight: 300; line-height: 1.4; color: #555555; max-width: 95%; }
 
-        /* 全屏放大查看器 */
-        #lightbox {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            align-items: center;
-            justify-content: center;
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        #lightbox img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            cursor: zoom-out;
-        }
-        .close-tip {
-            position: fixed;
-            top: 20px; right: 20px;
-            color: #fff;
-            background: rgba(255,255,255,0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            letter-spacing: 1px;
-            z-index: 1000;
-            cursor: pointer;
-        }
+        #lightbox { display: none; position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.95); align-items: center; justify-content: center; overflow: auto; -webkit-overflow-scrolling: touch; }
+        #lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; cursor: zoom-out; }
+        .close-tip { position: fixed; top: 20px; right: 20px; color: #fff; background: rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; font-size: 11px; letter-spacing: 1px; z-index: 1000; cursor: pointer; }
 
-        .scroll-tip {
-            position: fixed;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            font-size: 8px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: rgba(0,0,0,0.4);
-            animation: bounce 2s infinite;
-            pointer-events: none;
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
-            40% {transform: translateY(-3px) translateX(-50%);}
-            60% {transform: translateY(-1px) translateX(-50%);}
-        }
+        .scroll-tip { position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 10; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: rgba(0,0,0,0.4); animation: bounce 2s infinite; pointer-events: none; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);} 40% {transform: translateY(-3px) translateX(-50%);} 60% {transform: translateY(-1px) translateX(-50%);} }
     </style>
 </head>
 <body>
 
     <div class="container">
         <!-- 01 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide1.webp')"><img src="slide1.webp" alt="Slide 1" loading="lazy"></div><div class="content"><div class="tag">01 / 19</div><h1>hauswear/Introducting</h1></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide1.webp')"><img src="slide1.webp" alt="Slide 1"></div><div class="content"><div class="tag">01 / 19</div><h1>hauswear/Introducting</h1></div></section>
         <!-- 02 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide2.webp')"><img src="slide2.webp" alt="Slide 2" loading="lazy"></div><div class="content"><div class="tag">02 / 19</div><h1>/001 BRAND CONCEPT</h1><p>hauswear/Introducting</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide2.webp')"><img src="slide2.webp" alt="Slide 2"></div><div class="content"><div class="tag">02 / 19</div><h1>/001 BRAND CONCEPT</h1><p>hauswear/Introducting</p></div></section>
         <!-- 03 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide3.webp')"><img src="slide3.webp" alt="Slide 3" loading="lazy"></div><div class="content"><div class="tag">03 / 19</div><h1>/001 BRAND CONCEPT</h1><p>hauswear诞生于对日常边界的重新理解</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide3.webp')"><img src="slide3.webp" alt="Slide 3"></div><div class="content"><div class="tag">03 / 19</div><h1>/001 BRAND CONCEPT</h1><p>hauswear诞生于对日常边界的重新理解</p></div></section>
         <!-- 04 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide4.webp')"><img src="slide4.webp" alt="Slide 4" loading="lazy"></div><div class="content"><div class="tag">04 / 19</div><h1>/001 BRAND CONCEPT</h1><p>unstudied unforced unbound</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide4.webp')"><img src="slide4.webp" alt="Slide 4"></div><div class="content"><div class="tag">04 / 19</div><h1>/001 BRAND CONCEPT</h1><p>unstudied unforced unbound</p></div></section>
         <!-- 05 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide5.webp')"><img src="slide5.webp" alt="Slide 5" loading="lazy"></div><div class="content"><div class="tag">05 / 19</div><h1>/002 PRODUCT</h1><p>hauswear/Introducting</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide5.webp')"><img src="slide5.webp" alt="Slide 5"></div><div class="content"><div class="tag">05 / 19</div><h1>/002 PRODUCT</h1><p>hauswear/Introducting</p></div></section>
         <!-- 06 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide6.webp')"><img src="slide6.webp" alt="Slide 6" loading="lazy"></div><div class="content"><div class="tag">06 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide6.webp')"><img src="slide6.webp" alt="Slide 6"></div><div class="content"><div class="tag">06 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div></section>
 
         <!-- 07: 第七页左右双图展示 -->
         <section class="slide">
             <div class="slide-dual-wrap">
                 <div class="dual-img-box" onclick="openLightbox('slide7_left.webp')">
-                    <img src="slide7_left.webp" alt="Slide 7 Left" loading="lazy">
+                    <img src="slide7_left.webp" alt="Slide 7 Left">
                 </div>
                 <div class="dual-img-box" onclick="openLightbox('slide7_right.webp')">
-                    <img src="slide7_right.webp" alt="Slide 7 Right" loading="lazy">
+                    <img src="slide7_right.webp" alt="Slide 7 Right">
                 </div>
             </div>
             <div class="content">
@@ -219,10 +73,10 @@
         <section class="slide">
             <div class="slide-dual-wrap">
                 <div class="dual-img-box" onclick="openLightbox('slide8_left.webp')">
-                    <img src="slide8_left.webp" alt="Slide 8 Left" loading="lazy">
+                    <img src="slide8_left.webp" alt="Slide 8 Left">
                 </div>
                 <div class="dual-img-box" onclick="openLightbox('slide8_right.webp')">
-                    <img src="slide8_right.webp" alt="Slide 8 Right" loading="lazy">
+                    <img src="slide8_right.webp" alt="Slide 8 Right">
                 </div>
             </div>
             <div class="content">
@@ -236,10 +90,10 @@
         <section class="slide">
             <div class="slide-dual-wrap">
                 <div class="dual-img-box" onclick="openLightbox('slide9_left.webp')">
-                    <img src="slide9_left.webp" alt="Slide 9 Left" loading="lazy">
+                    <img src="slide9_left.webp" alt="Slide 9 Left">
                 </div>
                 <div class="dual-img-box" onclick="openLightbox('slide9_right.webp')">
-                    <img src="slide9_right.webp" alt="Slide 9 Right" loading="lazy">
+                    <img src="slide9_right.webp" alt="Slide 9 Right">
                 </div>
             </div>
             <div class="content">
@@ -250,16 +104,16 @@
         </section>
 
         <!-- 后续页面 (10 ~ 19) -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide10.webp')"><img src="slide10.webp" alt="Slide 10" loading="lazy"></div><div class="content"><div class="tag">10 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide11.webp')"><img src="slide11.webp" alt="Slide 11" loading="lazy"></div><div class="content"><div class="tag">11 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide12.webp')"><img src="slide12.webp" alt="Slide 12" loading="lazy"></div><div class="content"><div class="tag">12 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide13.webp')"><img src="slide13.webp" alt="Slide 13" loading="lazy"></div><div class="content"><div class="tag">13 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide14.webp')"><img src="slide14.webp" alt="Slide 14" loading="lazy"></div><div class="content"><div class="tag">14 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide15.webp')"><img src="slide15.webp" alt="Slide 15" loading="lazy"></div><div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide16.webp')"><img src="slide16.webp" alt="Slide 16" loading="lazy"></div><div class="content"><div class="tag">16 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide17.webp')"><img src="slide17.webp" alt="Slide 17" loading="lazy"></div><div class="content"><div class="tag">17 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide18.webp')"><img src="slide18.webp" alt="Slide 18" loading="lazy"></div><div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide19.webp')"><img src="slide19.webp" alt="Slide 19" loading="lazy"></div><div class="content"><div class="tag">19 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>感谢阅读</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide10.webp')"><img src="slide10.webp" alt="Slide 10"></div><div class="content"><div class="tag">10 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide11.webp')"><img src="slide11.webp" alt="Slide 11"></div><div class="content"><div class="tag">11 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide12.webp')"><img src="slide12.webp" alt="Slide 12"></div><div class="content"><div class="tag">12 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide13.webp')"><img src="slide13.webp" alt="Slide 13"></div><div class="content"><div class="tag">13 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide14.webp')"><img src="slide14.webp" alt="Slide 14"></div><div class="content"><div class="tag">14 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide15.webp')"><img src="slide15.webp" alt="Slide 15"></div><div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide16.webp')"><img src="slide16.webp" alt="Slide 16"></div><div class="content"><div class="tag">16 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide17.webp')"><img src="slide17.webp" alt="Slide 17"></div><div class="content"><div class="tag">17 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide18.webp')"><img src="slide18.webp" alt="Slide 18"></div><div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide19.webp')"><img src="slide19.webp" alt="Slide 19"></div><div class="content"><div class="tag">19 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>感谢阅读</p></div></section>
     </div>
 
     <!-- 全屏放大查看器 -->
@@ -277,10 +131,8 @@
             lightboxImg.src = imgSrc;
             lightbox.style.display = 'flex';
         }
-
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'none';
+            document.getElementById('lightbox').style.display = 'none';
         }
     </script>
 </body>
