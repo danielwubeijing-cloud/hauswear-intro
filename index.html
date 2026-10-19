@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
     <title>Hauswear | unstudied unforced unbound</title>
     <style>
         * {
@@ -14,9 +14,9 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: #0b0b0b;
+            background-color: #ffffff; /* 调整为默认白色背景 */
             font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-            color: #fff;
+            color: #222222; /* 整体默认深灰色文字 */
         }
         /* 全屏视差滚动容器 */
         .container {
@@ -35,71 +35,96 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 30px 24px;
-            /* 完整展示横版图片，绝不裁剪 */
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #0b0b0b;
+            padding: 24px 20px;
+            background-color: #ffffff;
         }
         
-        /* 优化点：只在底部极小区域做轻微渐变，绝不遮挡产品大图 */
+        /* 真正的图片容器，支持点击放大看细节 */
+        .slide-img-wrap {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-in;
+        }
+        .slide-img-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* 极度轻量的白色底部渐变，不遮挡产品大图 */
         .slide::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 160px;
-            background: linear-gradient(to top, rgba(11,11,11,0.95) 20%, rgba(11,11,11,0.5) 60%, transparent 100%);
+            bottom: 0; left: 0; width: 100%; height: 110px;
+            background: linear-gradient(to top, rgba(255,255,255,0.95) 20%, transparent 100%);
             z-index: 1;
+            pointer-events: none;
         }
 
         .content {
             position: relative;
             z-index: 2;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
+            pointer-events: none;
         }
         .tag {
             font-size: 9px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #d4af37; /* 莫兰迪金色点缀 */
-            margin-bottom: 3px;
+            color: #b3932f; /* 莫兰迪金色点缀调深以适应白底 */
+            margin-bottom: 2px;
             font-weight: 500;
         }
         h1 {
-            font-size: 17px;
-            font-weight: 300;
+            font-size: 16px;
+            font-weight: 400;
             line-height: 1.2;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             letter-spacing: 1px;
+            color: #1a1a1a; /* 调整为深灰色/近黑色 */
         }
         p {
             font-size: 11px;
             font-weight: 300;
             line-height: 1.4;
-            color: #d0d0d0;
+            color: #555555; /* 调整为深灰色段落文字 */
             max-width: 95%;
         }
 
-        /* 19张幻灯片图片精确匹配 */
-        #slide1  { background-image: url('slide1.jpeg'); } 
-        #slide2  { background-image: url('slide2.jpeg'); } 
-        #slide3  { background-image: url('slide3.jpeg'); } 
-        #slide4  { background-image: url('slide4.jpeg'); } 
-        #slide5  { background-image: url('slide5.jpeg'); } 
-        #slide6  { background-image: url('slide6.jpeg'); } 
-        #slide7  { background-image: url('slide7.jpeg'); } 
-        #slide8  { background-image: url('slide8.jpeg'); } 
-        #slide9  { background-image: url('slide9.jpeg'); } 
-        #slide10 { background-image: url('slide10.jpeg'); } 
-        #slide11 { background-image: url('slide11.jpeg'); } 
-        #slide12 { background-image: url('slide12.jpeg'); } 
-        #slide13 { background-image: url('slide13.jpeg'); } 
-        #slide14 { background-image: url('slide14.jpeg'); } 
-        #slide15 { background-image: url('slide15.jpeg'); } 
-        #slide16 { background-image: url('slide16.jpeg'); } 
-        #slide17 { background-image: url('slide17.jpeg'); } 
-        #slide18 { background-image: url('slide18.jpeg'); } 
-        #slide19 { background-image: url('slide19.jpeg'); } 
+        /* 全屏放大查看器（Lightbox 模态框）样式 */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        #lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            cursor: zoom-out;
+        }
+        .close-tip {
+            position: fixed;
+            top: 20px; right: 20px;
+            color: #fff;
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            z-index: 1000;
+            cursor: pointer;
+        }
 
         /* 底部滑动提示 */
         .scroll-tip {
@@ -111,8 +136,9 @@
             font-size: 8px;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.4);
+            color: rgba(0,0,0,0.4);
             animation: bounce 2s infinite;
+            pointer-events: none;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
@@ -125,7 +151,8 @@
 
     <div class="container">
         <!-- 01: 封面 -->
-        <section class="slide" id="slide1">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide1.jpeg')"><img src="slide1.jpeg" alt="Slide 1"></div>
             <div class="content">
                 <div class="tag">01 / 19</div>
                 <h1>hauswear/Introducting</h1>
@@ -133,7 +160,8 @@
         </section>
 
         <!-- 02: 品牌概念引言 -->
-        <section class="slide" id="slide2">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide2.jpeg')"><img src="slide2.jpeg" alt="Slide 2"></div>
             <div class="content">
                 <div class="tag">02 / 19</div>
                 <h1>/001 BRAND CONCEPT</h1>
@@ -142,7 +170,8 @@
         </section>
 
         <!-- 03: 核心理念正文 -->
-        <section class="slide" id="slide3">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide3.jpeg')"><img src="slide3.jpeg" alt="Slide 3"></div>
             <div class="content">
                 <div class="tag">03 / 19</div>
                 <h1>/001 BRAND CONCEPT</h1>
@@ -151,7 +180,8 @@
         </section>
 
         <!-- 04: 三大精神宣言 -->
-        <section class="slide" id="slide4">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide4.jpeg')"><img src="slide4.jpeg" alt="Slide 4"></div>
             <div class="content">
                 <div class="tag">04 / 19</div>
                 <h1>/001 BRAND CONCEPT</h1>
@@ -160,7 +190,8 @@
         </section>
 
         <!-- 05: 产品矩阵引导 -->
-        <section class="slide" id="slide5">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide5.jpeg')"><img src="slide5.jpeg" alt="Slide 5"></div>
             <div class="content">
                 <div class="tag">05 / 19</div>
                 <h1>/002 PRODUCT</h1>
@@ -169,7 +200,8 @@
         </section>
 
         <!-- 06: 002.1 棉府绸家居服 -->
-        <section class="slide" id="slide6">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide6.jpeg')"><img src="slide6.jpeg" alt="Slide 6"></div>
             <div class="content">
                 <div class="tag">06 / 19</div>
                 <h1>/002.1 The Essential Poplin Lounge Wear</h1>
@@ -178,21 +210,26 @@
         </section>
 
         <!-- 07-10: 府绸系列大片延伸 -->
-        <section class="slide" id="slide7">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide7.jpeg')"><img src="slide7.jpeg" alt="Slide 7"></div>
             <div class="content"><div class="tag">07 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div>
         </section>
-        <section class="slide" id="slide8">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide8.jpeg')"><img src="slide8.jpeg" alt="Slide 8"></div>
             <div class="content"><div class="tag">08 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div>
         </section>
-        <section class="slide" id="slide9">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide9.jpeg')"><img src="slide9.jpeg" alt="Slide 9"></div>
             <div class="content"><div class="tag">09 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div>
         </section>
-        <section class="slide" id="slide10">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide10.jpeg')"><img src="slide10.jpeg" alt="Slide 10"></div>
             <div class="content"><div class="tag">10 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div>
         </section>
 
         <!-- 11: 002.2 可水洗真丝家居服 -->
-        <section class="slide" id="slide11">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide11.jpeg')"><img src="slide11.jpeg" alt="Slide 11"></div>
             <div class="content">
                 <div class="tag">11 / 19</div>
                 <h1>/002.2 Washable Silk Lounge Wear</h1>
@@ -201,15 +238,18 @@
         </section>
 
         <!-- 12-13: 真丝系列延伸 -->
-        <section class="slide" id="slide12">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide12.jpeg')"><img src="slide12.jpeg" alt="Slide 12"></div>
             <div class="content"><div class="tag">12 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div>
         </section>
-        <section class="slide" id="slide13">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide13.jpeg')"><img src="slide13.jpeg" alt="Slide 13"></div>
             <div class="content"><div class="tag">13 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div>
         </section>
 
         <!-- 14: 002.3 可水洗真丝眼罩 -->
-        <section class="slide" id="slide14">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide14.jpeg')"><img src="slide14.jpeg" alt="Slide 14"></div>
             <div class="content">
                 <div class="tag">14 / 19</div>
                 <h1>/002.3 Washable Silk Eye Mask</h1>
@@ -218,15 +258,18 @@
         </section>
 
         <!-- 15-16: 眼罩系列延伸 -->
-        <section class="slide" id="slide15">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide15.jpeg')"><img src="slide15.jpeg" alt="Slide 15"></div>
             <div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div>
         </section>
-        <section class="slide" id="slide16">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide16.jpeg')"><img src="slide16.jpeg" alt="Slide 16"></div>
             <div class="content"><div class="tag">16 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div>
         </section>
 
         <!-- 17: 002.4 可水洗真丝发圈 -->
-        <section class="slide" id="slide17">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide17.jpeg')"><img src="slide17.jpeg" alt="Slide 17"></div>
             <div class="content">
                 <div class="tag">17 / 19</div>
                 <h1>/002.4 Washable Silk Scrunchie</h1>
@@ -235,12 +278,16 @@
         </section>
 
         <!-- 18: 发圈系列延伸 -->
-        <section class="slide" id="slide18">
-            <div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div>
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide18.jpeg')"><img src="slide18.jpeg" alt="Slide 18"></div>
+            <div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1>
+                <p>可水洗真丝发圈</p>
+            </div>
         </section>
 
         <!-- 19: 尾页 -->
-        <section class="slide" id="slide19">
+        <section class="slide">
+            <div class="slide-img-wrap" onclick="openLightbox('slide19.jpeg')"><img src="slide19.jpeg" alt="Slide 19"></div>
             <div class="content">
                 <div class="tag">19 / 19</div>
                 <h1>/002.4 Washable Silk Scrunchie</h1>
@@ -249,7 +296,26 @@
         </section>
     </div>
 
+    <!-- 全屏放大查看器 -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <div class="close-tip">✕ 关闭</div>
+        <img id="lightbox-img" src="" alt="Zoomed Image">
+    </div>
+
     <div class="scroll-tip">↓ Scroll (1/19)</div>
 
+    <script>
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'none';
+        }
+    </script>
 </body>
 </html>
