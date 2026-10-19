@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Hauswear | 居家色彩与情绪平衡</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0b0b0b;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            color: #fff;
+        }
+        /* 全屏视差滚动容器 */
+        .container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .slide {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 48px 28px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        /* 优雅的底部渐变黑幕，确保大片之上的文字清晰可读 */
+        .slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 65%;
+            background: linear-gradient(to top, rgba(0,0,0,0.88) 15%, rgba(0,0,0,0.4) 65%, transparent 100%);
+            z-index: 1;
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+        .tag {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #d4af37; /* 莫兰迪金色点缀 */
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        h1 {
+            font-size: 22px;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        p {
+            font-size: 12px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #d0d0d0;
+            max-width: 95%;
+        }
+
+        /* 19张幻灯片图片精确匹配 */
+        #slide1  { background-image: url('hauswear intro-可编辑版.001.jpeg'); background-color: #222; } 
+        #slide2  { background-image: url('hauswear intro-可编辑版.002.jpeg'); background-color: #222; } 
+        #slide3  { background-image: url('hauswear intro-可编辑版.003.jpeg'); background-color: #222; } 
+        #slide4  { background-image: url('hauswear intro-可编辑版.004.jpeg'); background-color: #222; } 
+        #slide5  { background-image: url('hauswear intro-可编辑版.005.jpeg'); background-color: #222; } 
+        #slide6  { background-image: url('hauswear intro-可编辑版.006.jpeg'); background-color: #222; } 
+        #slide7  { background-image: url('hauswear intro-可编辑版.007.jpeg'); background-color: #222; } 
+        #slide8  { background-image: url('hauswear intro-可编辑版.008.jpeg'); background-color: #222; } 
+        #slide9  { background-image: url('hauswear intro-可编辑版.009.jpeg'); background-color: #222; } 
+        #slide10 { background-image: url('hauswear intro-可编辑版.010.jpeg'); background-color: #222; } 
+        #slide11 { background-image: url('hauswear intro-可编辑版.011.jpeg'); background-color: #222; } 
+        #slide12 { background-image: url('hauswear intro-可编辑版.012.jpeg'); background-color: #222; } 
+        #slide13 { background-image: url('hauswear intro-可编辑版.013.jpeg'); background-color: #222; } 
+        #slide14 { background-image: url('hauswear intro-可编辑版.014.jpeg'); background-color: #222; } 
+        #slide15 { background-image: url('hauswear intro-可编辑版.015.jpeg'); background-color: #222; } 
+        #slide16 { background-image: url('hauswear intro-可编辑版.016.jpeg'); background-color: #222; } 
+        #slide17 { background-image: url('hauswear intro-可编辑版.017.jpeg'); background-color: #222; } 
+        #slide18 { background-image: url('hauswear intro-可编辑版.018.jpeg'); background-color: #222; } 
+        #slide19 { background-image: url('hauswear intro-可编辑版.019.jpeg'); background-color: #222; } 
+
+        /* 底部上下滑动提示 */
+        .scroll-tip {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-6px) translateX(-50%);}
+            60% {transform: translateY(-3px) translateX(-50%);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 01: 封面 -->
+        <section class="slide" id="slide1">
+            <div class="content">
+                <div class="tag">01 / 19</div>
+                <h1>Introducing hauswear</h1>
+                <p>居家色彩与情绪平衡生活方式品牌</p>
+            </div>
+        </section>
+
+        <!-- 02: 品牌概念引言 -->
+        <section class="slide" id="slide2">
+            <div class="content">
+                <div class="tag">02 / Brand Concept</div>
+                <h1>/001 品牌理念</h1>
+                <p>hauswear 诞生于对日常边界的重新理解。</p>
+            </div>
+        </section>
+
+        <!-- 03: 核心理念正文 -->
+        <section class="slide" id="slide3">
+            <div class="content">
+                <div class="tag">03 / Philosophy</div>
+                <h1>生活不必切换风格</h1>
+                <p>家里是生活，出门也是生活。不刻意追逐新鲜，不费力制造仪式，舒适亦能自始至终。</p>
+            </div>
+        </section>
+
+        <!-- 04: 三大精神宣言 -->
+        <section class="slide" id="slide4">
+            <div class="content">
+                <div class="tag">04 / Manifesto</div>
+                <h1>unstudied. unforced. unbound.</h1>
+                <p>不费力 / 不刻意 / 不设限。让自我品味自然融入生活本身。</p>
+            </div>
+        </section>
+
+        <!-- 05: 产品矩阵引导 -->
+        <section class="slide" id="slide5">
+            <div class="content">
+                <div class="tag">05 / Products</div>
+                <h1>/002 核心产品系列</h1>
+                <p>满足每一个放松时刻的高端材质与质感呈现。</p>
+            </div>
+        </section>
+
+        <!-- 06: 002.1 棉府绸家居服 -->
+        <section class="slide" id="slide6">
+            <div class="content">
+                <div class="tag">06 / The Essential Poplin</div>
+                <h1>/002.1 棉府绸家居服</h1>
+                <p>The Essential Poplin Lounge Wear —— 挺括透气，兼顾卧室与街头的松弛感。</p>
+            </div>
+        </section>
+
+        <!-- 07-10: 府绸系列大片延伸 -->
+        <section class="slide" id="slide7">
+            <div class="content"><div class="tag">07 / Poplin Series</div><h1>棉府绸系列演绎</h1><p>质感与光影的平衡交织</p></div>
+        </section>
+        <section class="slide" id="slide8">
+            <div class="content"><div class="tag">08 / Poplin Series</div><h1>日常边界的探索</h1><p>让舒适自始至终</p></div>
+        </section>
+        <section class="slide" id="slide9">
+            <div class="content"><div class="tag">09 / Poplin Series</div><h1>色彩与情绪空间</h1><p>克制而优雅的视觉表达</p></div>
+        </section>
+        <section class="slide" id="slide10">
+            <div class="content"><div class="tag">10 / Poplin Series</div><h1>自在状态</h1><p>随性而发的时髦感</p></div>
+        </section>
+
+        <!-- 11: 002.2 可水洗真丝家居服 -->
+        <section class="slide" id="slide11">
+            <div class="content">
+                <div class="tag">11 / Washable Silk</div>
+                <h1>/002.2 可水洗真丝家居服</h1>
+                <p>Washable Silk Lounge Wear —— 触感温润，兼具奢华质感与日常好打理的实用性。</p>
+            </div>
+        </section>
+
+        <!-- 12-13: 真丝系列延伸 -->
+        <section class="slide" id="slide12">
+            <div class="content"><div class="tag">12 / Silk Series</div><h1>真丝系列质感</h1><p>光影流转间的柔顺触感</p></div>
+        </section>
+        <section class="slide" id="slide13">
+            <div class="content"><div class="tag">13 / Silk Series</div><h1>情绪的温柔栖息</h1><p>触得到的细腻与平衡</p></div>
+        </section>
+
+        <!-- 14: 002.3 可水洗真丝眼罩 -->
+        <section class="slide" id="slide14">
+            <div class="content">
+                <div class="tag">14 / Silk Eye Mask</div>
+                <h1>/002.3 可水洗真丝眼罩</h1>
+                <p>Washable Silk Eye Mask —— 呵护每一刻深度休憩，将优雅延伸至睡眠细节。</p>
+            </div>
+        </section>
+
+        <!-- 15-16: 眼罩系列延伸 -->
+        <section class="slide" id="slide15">
+            <div class="content"><div class="tag">15 / Eye Mask</div><h1>休憩时刻</h1><p>安稳包裹的私密温柔</p></div>
+        </section>
+        <section class="slide" id="slide16">
+            <div class="content"><div class="tag">16 / Eye Mask</div><h1>精细工艺</h1><p>细节之处见真章</p></div>
+        </section>
+
+        <!-- 17: 002.4 可水洗真丝发圈 -->
+        <section class="slide" id="slide17">
+            <div class="content">
+                <div class="tag">17 / Silk Scrunchie</div>
+                <h1>/002.4 可水洗真丝发圈</h1>
+                <p>Washable Silk Scrunchie —— 点缀日常的精致细节，轻巧却不失品味。</p>
+            </div>
+        </section>
+
+        <!-- 18: 发圈系列延伸 -->
+        <section class="slide" id="slide18">
+            <div class="content"><div class="tag">18 / Scrunchie</div><h1>随性点缀</h1><p>生活中的灵动切片</p></div>
+        </section>
+
+        <!-- 19: 尾页 -->
+        <section class="slide" id="slide19">
+            <div class="content">
+                <div class="tag">19 / Outro</div>
+                <h1>hauswear</h1>
+                <p>感谢阅读。Unstudied. Unforced. Unbound.</p>
+            </div>
+        </section>
+    </div>
+
+    <div class="scroll-tip">↓ Scroll (1/19)</div>
+
+</body>
+</html>
