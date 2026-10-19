@@ -39,6 +39,7 @@
             background-color: #ffffff;
         }
         
+        /* 单图容器 */
         .slide-img-wrap {
             position: absolute;
             top: 0; left: 0; width: 100%; height: calc(100vh - 100px);
@@ -53,6 +54,40 @@
             object-fit: contain;
         }
 
+        /* 左右双图容器（用于第7、8、9页） */
+        .slide-dual-wrap {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 40px;
+            gap: 30px;
+        }
+        .dual-img-box {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            cursor: zoom-in;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .dual-img-box img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+        .dual-img-box:hover img {
+            transform: scale(1.03);
+        }
+
+        /* 极轻量的白色底部渐变 */
         .slide::after {
             content: '';
             position: absolute;
@@ -92,6 +127,7 @@
             max-width: 95%;
         }
 
+        /* 全屏放大查看器 */
         #lightbox {
             display: none;
             position: fixed;
@@ -158,32 +194,69 @@
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide5.webp')"><img src="slide5.webp" alt="Slide 5" loading="lazy"></div><div class="content"><div class="tag">05 / 19</div><h1>/002 PRODUCT</h1><p>hauswear/Introducting</p></div></section>
         <!-- 06 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide6.webp')"><img src="slide6.webp" alt="Slide 6" loading="lazy"></div><div class="content"><div class="tag">06 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div></section>
-        <!-- 07 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide7.webp')"><img src="slide7.webp" alt="Slide 7" loading="lazy"></div><div class="content"><div class="tag">07 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div></section>
-        <!-- 08 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide8.webp')"><img src="slide8.webp" alt="Slide 8" loading="lazy"></div><div class="content"><div class="tag">08 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div></section>
-        <!-- 09 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide9.webp')"><img src="slide9.webp" alt="Slide 9" loading="lazy"></div><div class="content"><div class="tag">09 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div></section>
-        <!-- 10 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide10.webp')"><img src="slide10.webp" alt="Slide 10" loading="lazy"></div><div class="content"><div class="tag">10 / 19</div><h1>/002.1 The Essential Poplin Lounge Wear</h1><p>棉府绸家居服</p></div></section>
-        <!-- 11 -->
+
+        <!-- 07: 第七页左右双图展示 -->
+        <section class="slide">
+            <div class="slide-dual-wrap">
+                <div class="dual-img-box" onclick="openLightbox('slide7_left.webp')">
+                    <img src="slide7_left.webp" alt="Slide 7 Left" loading="lazy">
+                </div>
+                <div class="dual-img-box" onclick="openLightbox('slide7_right.webp')">
+                    <img src="slide7_right.webp" alt="Slide 7 Right" loading="lazy">
+                </div>
+            </div>
+            <div class="content">
+                <div class="tag">07 / 19</div>
+                <h1>/002.1 The Essential Poplin Lounge Wear</h1>
+                <p>棉府绸家居服（上装正反面细节）</p>
+            </div>
+        </section>
+
+        <!-- 08: 第八页左右双图展示 -->
+        <section class="slide">
+            <div class="slide-dual-wrap">
+                <div class="dual-img-box" onclick="openLightbox('slide8_left.webp')">
+                    <img src="slide8_left.webp" alt="Slide 8 Left" loading="lazy">
+                </div>
+                <div class="dual-img-box" onclick="openLightbox('slide8_right.webp')">
+                    <img src="slide8_right.webp" alt="Slide 8 Right" loading="lazy">
+                </div>
+            </div>
+            <div class="content">
+                <div class="tag">08 / 19</div>
+                <h1>/002.1 The Essential Poplin Lounge Wear</h1>
+                <p>棉府绸家居服（长裤正反面细节）</p>
+            </div>
+        </section>
+
+        <!-- 09: 第九页左右双图展示 -->
+        <section class="slide">
+            <div class="slide-dual-wrap">
+                <div class="dual-img-box" onclick="openLightbox('slide9_left.webp')">
+                    <img src="slide9_left.webp" alt="Slide 9 Left" loading="lazy">
+                </div>
+                <div class="dual-img-box" onclick="openLightbox('slide9_right.webp')">
+                    <img src="slide9_right.webp" alt="Slide 9 Right" loading="lazy">
+                </div>
+            </div>
+            <div class="content">
+                <div class="tag">09 / 19</div>
+                <h1>/002.1 The Essential Poplin Lounge Wear</h1>
+                <p>棉府绸家居服（短裤正反面细节）</p>
+            </div>
+        </section>
+
+        <!-- 后续页面 (10 ~ 19) -->
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide10.webp')"><img src="slide10.webp" alt="Slide 10" loading="lazy"></div><div class="content"><div class="tag">10 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide11.webp')"><img src="slide11.webp" alt="Slide 11" loading="lazy"></div><div class="content"><div class="tag">11 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
-        <!-- 12 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide12.webp')"><img src="slide12.webp" alt="Slide 12" loading="lazy"></div><div class="content"><div class="tag">12 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
-        <!-- 13 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide13.webp')"><img src="slide13.webp" alt="Slide 13" loading="lazy"></div><div class="content"><div class="tag">13 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服</p></div></section>
-        <!-- 14 -->
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide13.webp')"><img src="slide13.webp" alt="Slide 13" loading="lazy"></div><div class="content"><div class="tag">13 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide14.webp')"><img src="slide14.webp" alt="Slide 14" loading="lazy"></div><div class="content"><div class="tag">14 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
-        <!-- 15 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide15.webp')"><img src="slide15.webp" alt="Slide 15" loading="lazy"></div><div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
-        <!-- 16 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide16.webp')"><img src="slide16.webp" alt="Slide 16" loading="lazy"></div><div class="content"><div class="tag">16 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
-        <!-- 17 -->
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide16.webp')"><img src="slide16.webp" alt="Slide 16" loading="lazy"></div><div class="content"><div class="tag">16 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide17.webp')"><img src="slide17.webp" alt="Slide 17" loading="lazy"></div><div class="content"><div class="tag">17 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
-        <!-- 18 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide18.webp')"><img src="slide18.webp" alt="Slide 18" loading="lazy"></div><div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
-        <!-- 19 -->
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide19.webp')"><img src="slide19.webp" alt="Slide 19" loading="lazy"></div><div class="content"><div class="tag">19 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
+        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide19.webp')"><img src="slide19.webp" alt="Slide 19" loading="lazy"></div><div class="content"><div class="tag">19 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>感谢阅读</p></div></section>
     </div>
 
     <!-- 全屏放大查看器 -->
@@ -192,7 +265,7 @@
         <img id="lightbox-img" src="" alt="Zoomed Image">
     </div>
 
-    <div class="scroll-tip">↓ Scroll (1/19)</div>
+    <div class="scroll-tip">↓ Scroll</div>
 
     <script>
         function openLightbox(imgSrc) {
