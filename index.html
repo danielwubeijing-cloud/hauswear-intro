@@ -45,7 +45,7 @@
         .dual-img-box img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.2s ease; }
         .dual-img-box:hover img { transform: scale(1.03); }
 
-        /* 第十页：大矩阵/响应式网格容器（横屏6列3行，竖屏3列6行按色系上衣/长裤/短裤排列） */
+        /* 第十页：大矩阵/响应式网格容器 */
         .slide-matrix-wrap {
             position: absolute;
             top: 10px; left: 20px; right: 20px; height: calc(100vh - 120px);
@@ -99,7 +99,43 @@
         #item_s_long { grid-column: 6; grid-row: 2; }
         #item_s_short { grid-column: 6; grid-row: 3; }
 
-        /* 竖屏状态下（手机竖屏）：同颜色横向排列（上衣、长裤、短裤） */
+        /* 第十五页：非对称三图混排容器（横屏左大右上下，竖屏3张竖排） */
+        .slide-asym-wrap {
+            position: absolute;
+            top: 10px; left: 30px; right: 30px; height: calc(100vh - 120px);
+            display: grid;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 1px solid #eaeaea;
+            padding: 16px;
+            gap: 16px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+        .asym-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+            cursor: zoom-in;
+            padding: 8px;
+        }
+        .asym-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+        .asym-item:hover img { transform: scale(1.03); }
+
+        #item_15_left { grid-column: 1; grid-row: 1 / span 2; }
+        #item_15_rt { grid-column: 2; grid-row: 1; }
+        #item_15_rb { grid-column: 2; grid-row: 2; }
+
+        /* 竖屏状态下（Portrait）响应式切换 */
         @media (orientation: portrait) {
             .slide-dual-wrap { 
                 flex-direction: column; 
@@ -134,6 +170,16 @@
             #item_s_top { grid-column: 1; grid-row: 6; }
             #item_s_long { grid-column: 2; grid-row: 6; }
             #item_s_short { grid-column: 3; grid-row: 6; }
+
+            .slide-asym-wrap {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(3, 1fr);
+                padding: 10px;
+                gap: 10px;
+            }
+            #item_15_left { grid-column: 1; grid-row: 1; }
+            #item_15_rt { grid-column: 1; grid-row: 2; }
+            #item_15_rb { grid-column: 1; grid-row: 3; }
         }
 
         .slide::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 110px; background: linear-gradient(to top, rgba(255,255,255,0.95) 20%, transparent 100%); z-index: 1; pointer-events: none; }
@@ -240,9 +286,20 @@
             <div class="content"><div class="tag">13 / 19</div><h1>/002.2 Washable Silk Lounge Wear</h1><p>可水洗真丝家居服（系列质感演绎）</p></div>
         </section>
 
-        <!-- 14 ~ 19 -->
+        <!-- 14 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide14.webp')"><img src="slide14.webp" alt="Slide 14"></div><div class="content"><div class="tag">14 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
-        <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide15.webp')"><img src="slide15.webp" alt="Slide 15"></div><div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩</p></div></section>
+
+        <!-- 15: 非对称三图混排页 -->
+        <section class="slide">
+            <div class="slide-asym-wrap">
+                <div class="asym-item" id="item_15_left" onclick="openLightbox('slide15_left.webp')"><img src="slide15_left.webp" alt="Slide 15 Left"></div>
+                <div class="asym-item" id="item_15_rt" onclick="openLightbox('slide15_right_top.webp')"><img src="slide15_right_top.webp" alt="Slide 15 Right Top"></div>
+                <div class="asym-item" id="item_15_rb" onclick="openLightbox('slide15_right_bottom.webp')"><img src="slide15_right_bottom.webp" alt="Slide 15 Right Bottom"></div>
+            </div>
+            <div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩（多角度立体展示）</p></div>
+        </section>
+
+        <!-- 16 ~ 19 -->
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide16.webp')"><img src="slide16.webp" alt="Slide 16"></div><div class="content"><div class="tag">16 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide17.webp')"><img src="slide17.webp" alt="Slide 17"></div><div class="content"><div class="tag">17 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
         <section class="slide"><div class="slide-img-wrap" onclick="openLightbox('slide18.webp')"><img src="slide18.webp" alt="Slide 18"></div><div class="content"><div class="tag">18 / 19</div><h1>/002.4 Washable Silk Scrunchie</h1><p>可水洗真丝发圈</p></div></section>
