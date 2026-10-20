@@ -47,7 +47,7 @@
         #item_s_long { grid-column: 6; grid-row: 2; }
         #item_s_short { grid-column: 6; grid-row: 3; }
 
-        /* 第十六页：三列卡片网格容器（黑、灰、粉三套展示，每套上下两图） */
+        /* 第十六页：三列卡片网格容器（桌面端保持3列，竖屏变为2列3行共6个独立格子） */
         .slide-trio-wrap {
             position: absolute;
             top: 10px; left: 20px; right: 20px; height: calc(100vh - 120px);
@@ -125,22 +125,41 @@
             #item_s_long { grid-column: 2; grid-row: 6; }
             #item_s_short { grid-column: 3; grid-row: 6; }
 
-            /* 竖屏响应式：黑/灰/粉三行独立展示，确保每套完整呈现上方大图、下方大图并可平滑滚动 */
+            /* 竖屏响应式：第16页变为2列3行网格（2 2 2 竖着排列），共6个独立的图框 */
             .slide-trio-wrap {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(3, 1fr);
                 padding: 10px;
-                gap: 14px;
+                gap: 10px;
                 overflow-y: auto;
                 -webkit-overflow-scrolling: touch;
             }
             .trio-card {
-                padding: 10px;
-                min-height: 280px;
-                gap: 8px;
+                flex-direction: row;
+                padding: 8px;
+                min-height: 0;
+                gap: 0;
             }
-            .trio-top-img, .trio-bottom-img {
-                min-height: 110px;
+            .trio-single-box {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #ffffff;
+                border-radius: 6px;
+                border: 1px solid #eee;
+                cursor: zoom-in;
+                overflow: hidden;
+                padding: 6px;
+                min-height: 0;
+            }
+            .trio-single-box img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                transition: transform 0.2s ease;
+            }
+            .trio-single-box img:hover {
+                transform: scale(1.03);
             }
 
             .slide-asym-wrap { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); padding: 10px; gap: 10px; }
@@ -184,7 +203,7 @@
     <meta property="og:title" content="hauswear">
     <meta property="og:description" content=" | unstudied unforced unbound">
     <meta property="og:image" content="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/logo.png">
-    <meta property="og:url" content="https://danielwubeijing-cloud.github.io/hauswear-intro/">
+    <meta property="og:url" content="https://www.hauswear.cn/">
     <link rel="apple-touch-icon" href="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/logo.png">
     <link rel="icon" href="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/logo.png">
 </head>
@@ -349,33 +368,33 @@
             <div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩（多角度立体展示）</p></div>
         </section>
 
-        <!-- 16: 三列卡片交互页（黑、灰, 粉三套独立上下两张图点击预览） -->
+        <!-- 16: 三列卡片交互页（桌面端3列卡片，竖屏时2列3行共6个独立图框竖着排列） -->
         <section class="slide">
             <div class="slide-trio-wrap">
                 <!-- 黑色套 -->
                 <div class="trio-card">
-                    <div class="trio-top-img" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_top.webp')">
+                    <div class="trio-top-img trio-single-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_top.webp')">
                         <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_top.webp" alt="Black Eye Mask Top">
                     </div>
-                    <div class="trio-bottom-img" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_bottom.webp')">
+                    <div class="trio-bottom-img trio-single-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_bottom.webp')">
                         <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_bottom.webp" alt="Black Eye Mask Bottom">
                     </div>
                 </div>
                 <!-- 灰色套 -->
                 <div class="trio-card">
-                    <div class="trio-top-img" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_top.webp')">
+                    <div class="trio-top-img trio-single-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_top.webp')">
                         <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_top.webp" alt="Grey Eye Mask Top">
                     </div>
-                    <div class="trio-bottom-img" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_bottom.webp')">
+                    <div class="trio-bottom-img trio-single-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_bottom.webp')">
                         <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_bottom.webp" alt="Grey Eye Mask Bottom">
                     </div>
                 </div>
                 <!-- 粉色套 -->
                 <div class="trio-card">
-                    <div class="trio-top-img" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_top.webp')">
+                    <div class="trio-top-img trio-single-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_top.webp')">
                         <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_top.webp" alt="Pink Eye Mask Top">
                     </div>
-                    <div class="trio-bottom-img" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_bottom.webp')">
+                    <div class="trio-bottom-img trio-single-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_bottom.webp')">
                         <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_bottom.webp" alt="Pink Eye Mask Bottom">
                     </div>
                 </div>
