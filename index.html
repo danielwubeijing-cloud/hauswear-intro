@@ -47,7 +47,7 @@
         #item_s_long { grid-column: 6; grid-row: 2; }
         #item_s_short { grid-column: 6; grid-row: 3; }
 
-        /* 第十六页：修复后的 3列 × 2行 网格容器（PC端与移动端统一规范） */
+        /* 第16页：PC端定义为 3列 × 2行 网格 */
         .slide-trio-wrap {
             position: absolute;
             top: 10px; left: 20px; right: 20px; height: calc(100vh - 120px);
@@ -84,6 +84,14 @@
             transform: scale(1.03);
         }
 
+        /* PC端网格定位：第一行全为 Top，第二行全为 Bottom[span_0](start_span)[span_0](end_span) */
+        #mask_black_top { grid-column: 1; grid-row: 1; }
+        #mask_grey_top  { grid-column: 2; grid-row: 1; }
+        #mask_pink_top  { grid-column: 3; grid-row: 1; }
+        #mask_black_bot { grid-column: 1; grid-row: 2; }
+        #mask_grey_bot  { grid-column: 2; grid-row: 2; }
+        #mask_pink_bot  { grid-column: 3; grid-row: 2; }
+
         /* 非对称三图混排容器 */
         .slide-asym-wrap { position: absolute; top: 10px; left: 30px; right: 30px; height: calc(100vh - 120px); display: grid; background: #fafafa; border-radius: 12px; border: 1px solid #eaeaea; padding: 16px; gap: 16px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
         .asym-item { display: flex; align-items: center; justify-content: center; background: #ffffff; border-radius: 8px; border: 1px solid #f0f0f0; overflow: hidden; cursor: zoom-in; padding: 8px; }
@@ -117,7 +125,7 @@
             #item_s_long { grid-column: 2; grid-row: 6; }
             #item_s_short { grid-column: 3; grid-row: 6; }
 
-            /* 竖屏响应式：第16页调整为 2列 × 3行 网格 */
+            /* 竖屏响应式：第16页调整为 2列 × 3行 网格，按色彩成对展示（黑、灰、粉上下配对）[span_1](start_span)[span_1](end_span) */
             .slide-trio-wrap {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(3, 1fr);
@@ -125,6 +133,12 @@
                 gap: 10px;
                 overflow: hidden;
             }
+            #mask_black_top { grid-column: 1; grid-row: 1; }
+            #mask_black_bot { grid-column: 2; grid-row: 1; }
+            #mask_grey_top  { grid-column: 1; grid-row: 2; }
+            #mask_grey_bot  { grid-column: 2; grid-row: 2; }
+            #mask_pink_top  { grid-column: 1; grid-row: 3; }
+            #mask_pink_bot  { grid-column: 2; grid-row: 3; }
 
             .slide-asym-wrap { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); padding: 10px; gap: 10px; }
             #item_15_left { grid-column: 1; grid-row: 1; }
@@ -331,25 +345,25 @@
             <div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩（多角度立体展示）</p></div>
         </section>
 
-        <!-- 16: 第16页修复：规范 3列 × 2行 网格，自适应容器高度防止撑破 -->
+        <!-- 16: 第16页精准排布 -->
         <section class="slide">
             <div class="slide-trio-wrap">
-                <div class="trio-item-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_top.webp')">
+                <div class="trio-item-box" id="mask_black_top" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_top.webp')">
                     <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_top.webp" alt="Black Top">
                 </div>
-                <div class="trio-item-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_bottom.webp')">
+                <div class="trio-item-box" id="mask_black_bot" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_bottom.webp')">
                     <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_bottom.webp" alt="Black Bottom">
                 </div>
-                <div class="trio-item-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_top.webp')">
+                <div class="trio-item-box" id="mask_grey_top" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_top.webp')">
                     <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_top.webp" alt="Grey Top">
                 </div>
-                <div class="trio-item-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_bottom.webp')">
+                <div class="trio-item-box" id="mask_grey_bot" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_bottom.webp')">
                     <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_grey_bottom.webp" alt="Grey Bottom">
                 </div>
-                <div class="trio-item-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_top.webp')">
+                <div class="trio-item-box" id="mask_pink_top" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_top.webp')">
                     <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_top.webp" alt="Pink Top">
                 </div>
-                <div class="trio-item-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_bottom.webp')">
+                <div class="trio-item-box" id="mask_pink_bot" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_bottom.webp')">
                     <img src="https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_pink_bottom.webp" alt="Pink Bottom">
                 </div>
             </div>
