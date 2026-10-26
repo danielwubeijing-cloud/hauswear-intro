@@ -47,48 +47,40 @@
         #item_s_long { grid-column: 6; grid-row: 2; }
         #item_s_short { grid-column: 6; grid-row: 3; }
 
-        /* 第十六页：桌面端3列卡片网格容器 */
+        /* 第十六页：修复后的 3列 × 2行 网格容器（PC端与移动端统一规范） */
         .slide-trio-wrap {
             position: absolute;
             top: 10px; left: 20px; right: 20px; height: calc(100vh - 120px);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
             background: #fafafa;
             border-radius: 12px;
             border: 1px solid #eaeaea;
             padding: 16px;
             gap: 16px;
-            overflow-y: auto;
+            overflow: hidden;
         }
-        .trio-card {
-            display: flex;
-            flex-direction: column;
-            background: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            padding: 12px;
-            gap: 12px;
-        }
-        .trio-top-img, .trio-bottom-img {
-            flex: 1;
+        .trio-item-box {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fcfcfc;
-            border-radius: 6px;
-            border: 1px solid #f2f2f2;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eee;
             cursor: zoom-in;
             overflow: hidden;
-            padding: 8px;
-            min-height: 140px;
+            padding: 12px;
+            min-height: 0;
+            min-width: 0;
         }
-        .trio-card img {
+        .trio-item-box img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
             transition: transform 0.2s ease;
         }
-        .trio-card img:hover {
+        .trio-item-box img:hover {
             transform: scale(1.03);
         }
 
@@ -125,34 +117,13 @@
             #item_s_long { grid-column: 2; grid-row: 6; }
             #item_s_short { grid-column: 3; grid-row: 6; }
 
-            /* 竖屏响应式：第16页重构为直接的 2列 × 3行 网格，展示6个独立的单元格 */
+            /* 竖屏响应式：第16页调整为 2列 × 3行 网格 */
             .slide-trio-wrap {
                 grid-template-columns: repeat(2, 1fr);
                 grid-template-rows: repeat(3, 1fr);
                 padding: 10px;
                 gap: 10px;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-            }
-            .trio-item-box {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #ffffff;
-                border-radius: 8px;
-                border: 1px solid #eee;
-                cursor: zoom-in;
                 overflow: hidden;
-                padding: 8px;
-            }
-            .trio-item-box img {
-                max-width: 100%;
-                max-height: 100%;
-                object-fit: contain;
-                transition: transform 0.2s ease;
-            }
-            .trio-item-box img:hover {
-                transform: scale(1.03);
             }
 
             .slide-asym-wrap { grid-template-columns: 1fr; grid-template-rows: repeat(3, 1fr); padding: 10px; gap: 10px; }
@@ -175,7 +146,6 @@
         .scroll-tip { position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%); z-index: 10; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; color: rgba(0,0,0,0.4); animation: bounce 2s infinite; pointer-events: none; }
         @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);} 40% {transform: translateY(-3px) translateX(-50%);} 60% {transform: translateY(-1px) translateX(-50%);} }
     
-        /* 居中文字排版样式 */
         .slide-center-text { position: absolute; top: 0; left: 0; width: 100%; height: calc(100vh - 100px); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; cursor: zoom-in; }
         .slide-center-text .center-num { font-size: 13px; letter-spacing: 5px; color: #111111; margin-bottom: 20px; font-weight: 400; }
         .slide-center-text h2 { 
@@ -361,7 +331,7 @@
             <div class="content"><div class="tag">15 / 19</div><h1>/002.3 Washable Silk Eye Mask</h1><p>可水洗真丝眼罩（多角度立体展示）</p></div>
         </section>
 
-        <!-- 16: 第16页，桌面端3列卡片，竖屏时完美扁平化为 6 个独立格子，按 2 列 × 3 行排布 -->
+        <!-- 16: 第16页修复：规范 3列 × 2行 网格，自适应容器高度防止撑破 -->
         <section class="slide">
             <div class="slide-trio-wrap">
                 <div class="trio-item-box" onclick="openLightbox('https://hauswear-site-1387122512.cos.ap-shanghai.myqcloud.com/slide16_black_top.webp')">
